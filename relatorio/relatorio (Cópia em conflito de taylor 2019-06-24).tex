@@ -1,0 +1,84 @@
+\documentclass[12pt,a4paper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage[brazil]{babel}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\renewcommand{\baselinestretch}{1}
+\newcommand{\dis}{\displaystyle}
+\newcommand{\pa}{\partial}
+\newtheorem{theorem}{Teorema}
+\newtheorem{lemma}{Lema}
+\newtheorem{definition}{Definição}
+\begin{document}
+\begin{center}
+{\LARGE Relatorio Projeto Computacional MAP-5729}\medskip\\
+\large{Gustavo David Quintero Alvarez, Nº USP: 11350395\\
+Universidade de São Paulo - USP\\
+São Paulo - SP, 23/06/2019}
+\end{center}\vspace*{1cm}
+\begin{flushleft}
+\textbf{Introdução - Método de Rayleigh-Ritz}
+\end{flushleft}
+Consideremos a seguinte equação diferencial:
+\begin{equation}\label{eqprob}
+L(u(x)):=\left(-k(x)\,u'(x)\right)' + q(x)\,u(x) = f(x),\, \forall x\in (0,1),\, u(0)=u(1)=0,
+\end{equation}
+onde $k(x)>0,\, q(x)\geq 0,\,\forall x\in [0,1],\,k\in C^1[0,1]$ e $\,q,\,f\in C[0,1]$. O objetivo deste projeto é resolver a equação diferencial dada em \eqref{eqprob}. Seja $V_0$ o conjunto de todas as funções $v\in C^2[0,1]$ tais que $v(0)=(1)=0$. Dada uma solução do problema \eqref{eqprob} e $v(x)\in V_0$, é fácil ver que $$\dis\int_0^1 L(u(x))v(x)=\dis\int_0^1f(x)v(x).$$ Aplicando integração por partes temos que 
+\begin{eqnarray*}
+\dis\int_0^1 L(u(x))v(x) &=& -\dis\int_0^1(k(x)\,u'(x))'v(x) + \dis\int_0^1 q(x)\,u(x)\,v(x)  \\
+&=& \dis\int_0^1 k(x)\,u'(x)\,v'(x)\,dx + \dis\int_0^1 q(x)\,u(x)\,v(x).
+\end{eqnarray*}
+Portanto,
+\begin{equation}\label{forfrac}
+\dis\int_0^1 \left(k(x)\,u'(x)\,v'(x)+q(x)\,u(x)\,v(x)\right)dx = \dis\int_0^1f(x)\,v(x)
+\end{equation}
+Agora, se $u(x)\in V_0$ é uma função satisfazendo a relação anterior, então $u(x)$ é solução do problema \eqref{eqprob}. Assim, as formulações \eqref{eqprob} e \eqref{forfrac} são equivalentes.
+O Método de Rayleigh-Ritz consiste em escolher, dentre todas as funções suficientemente diferenciáveis que satisfazem as condições de fronteira dadas em \eqref{eqprob}, aquelas que minimizem uma determinada integral. A unicidade da caracterização feita entre as formulações \eqref{eqprob} e \eqref{forfrac}, é garantida pelo seguinte teorema:
+
+\begin{theorem}\label{teo1}
+Sejam $k\in C^1[0,1]$ e $q,\,f\in C[0,1]$ tais que $k(x)>0$ e $q(x)\geq 0,\,\forall x\in[0,1]$. Uma função $u(x)\in V_0$ é a solução única da equação diferencial
+\begin{equation}\label{form1}
+\left(-k(x)\,u'(x)\right)' + q(x)\,u(x) = f(x)
+\end{equation}
+se, e somnte se, é a solução única que minimza a integral
+\begin{equation}\label{form2}
+I(v) = \dis\int_0^1\left[k(x)(v'(x))^2 + q(x)(u(x))^2 - 2f(x)\,v(x)\right]dx,
+\end{equation}
+onde $v(x)\in V_0$.
+\end{theorem}
+\begin{proof}
+Vide Burdem
+\end{proof}
+Na prova do Teorema anterior, mostra-se que qualquer solução $u(x)$ de \eqref{form2}, também satisfaz a equação \eqref{forfrac}. Minimizando a integral $I$, o Método de Rayleigh-Ritz encontra uma aproximação para a solução $u(x)$ do problema em questão sobre um subconjunto de $V_0$, formado por combinações lineares de certas funções básicas $\phi_1,\dots,\phi_n$ linearmente independentes, e satisfazendo $\phi_i(0)=\phi_i(1)=0$, para cada $i=1,\dots,n$. 
+
+Sejam $c_1,\dots,c_n$ tais que $v(x)=\dis\sum_{i=1}^nc_i\,\phi_i(x)$, então de \eqref{form2}, temos que
+\begin{equation}
+\begin{aligned}
+I(v) &= I\left[\dis\sum_{i=1}^nc_i\,\phi_i(x) \right]\\
+&= \dis\int_0^1\left[k(x)\left(\dis\sum_{i=1}^nc_i\,\phi'_i(x)\right)^2q(x)\left(\dis\sum_{i=1}^nc_i\,\phi_i(x)\right)^2-2f(x)\dis\sum_{i=1}^nc_i\,\phi_i(x)\right]dx.
+\end{aligned}
+\end{equation}  
+Derivando a equação anterior em relação a $c_j$ para cada $j=1,\dots,n$, obtemos
+\begin{equation}\label{derI}
+\begin{aligned}
+\dfrac{\pa I}{\pa c_j} &= \dfrac{\pa }{\pa c_j}\dis\int_0^1\left[k(x)\left(\dis\sum_{i=1}^nc_i\,\phi'_i(x)\right)^2q(x)\left(\dis\sum_{i=1}^nc_i\,\phi_i(x)\right)^2-2f(x)\dis\sum_{i=1}^nc_i\,\phi_i(x)\right]dx\\
+&= \dis\int_0^1\dfrac{\pa}{\pa c_j}\left[k(x)\left(\dis\sum_{i=1}^nc_i\,\phi'_i(x)\right)^2q(x)\left(\dis\sum_{i=1}^nc_i\,\phi_i(x)\right)^2-2f(x)\dis\sum_{i=1}^nc_i\,\phi_i(x)\right]dx\\
+&= \dis\int_0^1\left(2\,k(x)\dis\sum_{i=1}^nc_i\,\phi'_i(x)\,\phi_j'(x) + 2\,q(x)\dis\sum_{i=1}^nc_i\,\phi'_i(x)\,\phi_j(x) - 2\,f(x)\,\phi_j(x)\right)dx.
+\end{aligned}
+\end{equation}
+Logo, como o objetivo é minimizar $I$, devemos ter, necessáriamente, $\dfrac{\pa I}{\pa c_j}=0$. Portanto da equação \eqref{derI}, temos que 
+\begin{equation}\label{sist}
+\begin{aligned}
+0 &= \dis\int_0^1\left(k(x)\dis\sum_{i=1}^nc_i\,\phi'_i(x)\,\phi_j'(x) + q(x)\dis\sum_{i=1}^nc_i\,\phi'_i(x)\,\phi_j(x) - f(x)\,\phi_j(x)\right)dx\\
+&= \dis\sum_{i=1}^n\left(\dis\int_0^1 (k(x)\,\phi'_i(x)\,\phi'_j(x) + q(x)\,\phi_i(x)\,\phi_j(x))dx\right)c_i - \dis\int_0^1f(x)\,\phi_j(x)\,dx\\
+&\Longrightarrow \dis\sum_{i=1}^n\left(\dis\int_0^1 (k(x)\,\phi'_i(x)\,\phi'_j(x) + q(x)\,\phi_i(x)\,\phi_j(x))dx\right)c_i = \dis\int_0^1f(x)\,\phi_j(x)\,dx
+\end{aligned}
+\end{equation}
+para cada $j=1,\dots,n$.
+
+Da relação \eqref{sist} obtemos um sistema linear $A\,c=b$
+\end{document}

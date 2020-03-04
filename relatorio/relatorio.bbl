@@ -1,0 +1,18 @@
+\begin{thebibliography}{}
+
+\bibitem[\protect\astroncite{Burden}{2016}]{bur}
+Burden, R.~L. (2016).
+\newblock {\em Análise numérica: Tradução da edição Norte-Americana}.
+\newblock Cengage, São Paulo, 10 edition.
+
+\bibitem[\protect\astroncite{Schultz}{1973}]{schu}
+Schultz, M.~H. (1973).
+\newblock {\em Spline analysis}.
+\newblock Prentice-Hall.
+
+\bibitem[\protect\astroncite{Schumaker}{2007}]{lar}
+Schumaker, L.~L. (2007).
+\newblock {\em Spline Functions: Basic Theory}.
+\newblock Cambridge Mathematical Library, Cambidge, 3 edition.
+
+\end{thebibliography}
